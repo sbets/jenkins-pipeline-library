@@ -1,12 +1,10 @@
 #!groovy
 
-
-
 node() {
     checkout scm
     
     try {
-        def config = readYaml(file: "config.yaml")
+        config = readYaml(file: "config.yaml")
     } catch (e) {
         println("Unexpected error: ${e}")
         currentBuild.result = 'FAILED'
