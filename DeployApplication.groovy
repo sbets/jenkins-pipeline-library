@@ -1,7 +1,7 @@
 #!groovy
 
 try {
-    config = readYaml file: 'config.yaml'
+    def config = readYaml file: 'config.yaml'
 } catch (e) {
     println("Unexpected error: ${e}")
     currentBuild.result = 'UNSTABLE'
