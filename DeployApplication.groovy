@@ -1,11 +1,10 @@
 #!groovy
 
-def tagVersion = sh(script: 'git tag -l --points-at HEAD', 
-                              returnStdout: true).trim()
+
 
 node() {
     checkout scm
-    
+    sh('env')
     try {
         config = readYaml(file: "config.yaml")
     } catch (e) {
@@ -18,6 +17,8 @@ node() {
     stage('Fetch code and check ENV') {
         
         try {
+          def tagVersion = sh(script: 'git tag -l --points-at HEAD', 
+                              returnStdout: true).trim()
             println tagVersion
             if (tagVersion) {
                 environment = "QA"
