@@ -1,16 +1,19 @@
 #!groovy
 
-try {
-    def config = readYaml(file: "config.yaml")
-} catch (e) {
-    println("Unexpected error: ${e}")
-    currentBuild.result = 'FAILED'
-}
 
-println config.weight
 
 node() {
     checkout scm
+    
+    try {
+        def config = readYaml(file: "config.yaml")
+    } catch (e) {
+        println("Unexpected error: ${e}")
+        currentBuild.result = 'FAILED'
+    }
+
+    println config.weight
+    
     stage('Fetch code and check ENV') {
         
         try {
