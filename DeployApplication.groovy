@@ -10,7 +10,7 @@ try {
 //println config.weight
 
 node() {
-    
+    checkout scm
     stage('Fetch code and check ENV') {
         
         sh 'env'
