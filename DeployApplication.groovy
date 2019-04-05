@@ -7,7 +7,7 @@ try {
     currentBuild.result = 'UNSTABLE'
 }
 
-println config.weight
+//println config.weight
 
 node() {
     
