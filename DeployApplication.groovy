@@ -1,21 +1,18 @@
 #!groovy
 
 try {
-    def config = readYaml file: 'config.yaml'
+    def config = readYaml(file: "config.yaml")
 } catch (e) {
     println("Unexpected error: ${e}")
-    currentBuild.result = 'UNSTABLE'
+    currentBuild.result = 'FAILED'
 }
 
-//println config.weight
+println config.weight
 
 node() {
     checkout scm
     stage('Fetch code and check ENV') {
         
-        sh 'env'
-        def BRANCH_NAME = "${env.BRANCH_NAME}"
-        println BRANCH_NAME
         try {
             tagVersion = sh(script: 'git tag -l --points-at HEAD', 
                               returnStdout: true).trim()
@@ -26,6 +23,8 @@ node() {
             } else {
                 environment = "DEV"
                 println(environment)
+                def BRANCH_NAME = "${env.BRANCH_NAME}"
+                println BRANCH_NAME
             }
         } catch (e) {
             println(e)
