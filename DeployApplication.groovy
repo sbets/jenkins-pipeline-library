@@ -1,7 +1,5 @@
 #!groovy
 
-
-
 node() {
     checkout scm
     sh('env')
